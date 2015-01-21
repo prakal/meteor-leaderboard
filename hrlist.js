@@ -60,23 +60,31 @@ if (Meteor.isClient){
   });
   Template.addPersonForm.events({
     'submit form' : function(event){
+      var whole_list=PeopleList.find({},{sort: {score:-1,name:1}}).fetch();
         event.preventDefault();
-        console.log(event.target.PersonName.value,event.target.Score.value,Meteor.userId());
-        Meteor.call('insertPersonData',event.target.PersonName.value,event.target.Score.value,Meteor.userId());
-        event.target.PersonName.value='';
-        event.target.Score.value='';
+        if (whole_list.length<7){
+          console.log(event.target.PersonName.value,event.target.Score.value,Meteor.userId());
+          Meteor.call('insertPersonData',event.target.PersonName.value,event.target.Score.value,Meteor.userId());
+          event.target.PersonName.value='';
+          event.target.Score.value='';
+        }
+        else{
+          event.target.PersonName.value='';
+          event.target.Score.value='';
+          window.alert("Cannot add any more people!")
+        }
     }
 
   });
+/*
   Template.peep_list.rendered = function() { 
         // Assuming you're using jQuery 
         $('body').on('keydown',function(e) { 
                 console.log(e.which);
-
                 console.log(Session.get('sel_person'));
-       
         }); 
   } 
+*/
 }
 if (Meteor.isServer){
   // this code only runs on Client side
