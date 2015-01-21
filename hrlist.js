@@ -1,6 +1,7 @@
 console.log("Hello world");
 PeopleList=new Mongo.Collection('people');
 if (Meteor.isClient){
+
   Meteor.subscribe('thePeople');
   // this code only runs on Client side
   console.log("Hello Client!");
