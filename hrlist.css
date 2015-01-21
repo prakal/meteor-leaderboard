@@ -1,0 +1,13 @@
+/* CSS declarations go here */
+.selected{
+	background-color:pink;	
+}
+body {
+    background-color: #accacc;
+    margin-left: auto;
+    margin-right: auto;
+    width:40%;
+}
+.table{
+	width:260px;
+}
